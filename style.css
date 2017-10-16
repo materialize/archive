@@ -53,6 +53,15 @@ li {
       color: #fff;
     }
 
+.select-wrapper {
+  width: 90px;
+  float: right;
+  margin-top: 7px;
+}
+  .nav .select-wrapper input.select-dropdown {
+    margin: 0;
+    border: 0;
+  }
 
 #docs-iframe-wrapper {
   position: fixed;

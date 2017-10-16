@@ -15,8 +15,10 @@
     <meta name="theme-color" content="#EE6E73">
     <!-- CSS-->
     <link href="style.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
   </head>
   <body>
     <div class="nav">
@@ -25,10 +27,9 @@
         <a class="back" href="http://materializecss.com">Back to the latest docs</a>
       </div>
 
-      <ul class="links">
-        <li><a id="0.97.5" href="?version=0.97.5">0.97.5</a></li>
-        <li><a id="0.97.4" href="?version=0.97.4">0.97.4</a></li>
-      </ul>
+      <select id="version-picker">
+        <option id="0.100.2" value="0.100.2">0.100.2</option>
+      </select>
     </div>
 
     <div id="docs-iframe-wrapper">
@@ -47,6 +48,11 @@
     ga('send', 'pageview');
     </script>
 
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script type="text/javascript">
       (function() {
         function getQueryParams(qs) {
@@ -70,12 +76,23 @@
         } else {
           version = '0.97.5';
         }
+        version = version.replace(/\/+$/, '');
 
-        var currLink = document.getElementById(version);
-        if (currLink.classList)
-          currLink.classList.add('active');
-        else
-          currLink.className += ' active';
+        // init select
+        var select = document.getElementById('version-picker');
+        if (select) {
+          var option = document.getElementById(version);
+          if (option) {
+            $(option).attr('selected', true);
+          }
+
+          $(select).material_select();
+          $(select).on('change', function() {
+            var value = $(this).val();
+            document.location.search = '?version=' + value;
+          });
+        }
+
         document.getElementById('docs-iframe').src = version + '/index.html';
       })();
     </script>
