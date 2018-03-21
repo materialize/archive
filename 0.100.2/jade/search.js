@@ -266,7 +266,6 @@
       var resultsContainer = $('.search-results');
       resultsContainer.empty();
       Array.prototype.forEach.call(results, function(result) {
-        console.log(result);
         var resultDiv = $('<a href=' + result[1] + '>' + result[0] + '</a>');
         resultsContainer.append(resultDiv);
       });
